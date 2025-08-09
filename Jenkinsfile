@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo '${IMAGE_NAME}'
+                echo "${IMAGE_NAME}"
             }
         }
         stage('test') {
