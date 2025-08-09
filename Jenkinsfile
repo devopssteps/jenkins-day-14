@@ -1,42 +1,16 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag')
-        booleanParam(name: 'PUSH_IMAGE', defaultValue: true, description: 'Push image to Docker Hub?')
-    }
-    environment {
-        IMAGE_NAME = "devopssteps/my-app-15"
-    }
-
     stages {
-        stage('clone') {
+        stage('build') {
             steps {
-                echo 'clone code............'
-                checkout scm
+                echo 'Hello World 111'
             }
         }
-        stage('build imgae') {
+        stage('test') {
             steps {
-                echo "Building Docker image with tag: ${params.IMAGE_TAG}"
-                //sh "docker build -t ${IMAGE_NAME}:${params.IMAGE_TAG} ."
-            }
-        }
-        stage('push imgae') {
-            when {
-                expression { return params.PUSH_IMAGE }
-            }
-            steps {
-                echo "Building Docker image with tag: ${params.IMAGE_TAG}"
-            }
+                echo 'Hello World test222'
+            }    
         }
     }
-    post {
-    success {
-        echo 'Pipeline succeeded!'
-    }
-    failure {
-        echo 'Pipeline failed.'
-    }
-}
 }
