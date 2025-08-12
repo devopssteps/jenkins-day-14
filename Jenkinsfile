@@ -2,15 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                echo 'Hello World 111'
+                echo 'Building...'
             }
         }
-        stage('test') {
-            steps {
-                echo 'Hello World 222'
-            }    
+    }
+
+    post {
+        success {
+            emailext subject: 'Build SUCCESS: ${JOB_NAME}',
+                     body: 'Job ${JOB_NAME} build #${BUILD_NUMBER} was successful.',
+                     to: 'rajiv19831@gmail.com'
+        }
+        failure {
+            emailext subject: 'Build FAILURE: ${JOB_NAME}',
+                     body: 'Job ${JOB_NAME} build #${BUILD_NUMBER} failed.',
+                     to: 'rajiv19831@gmail.com'
         }
     }
 }
