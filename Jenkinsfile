@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'exit 0'
+                sh 'exit 1'
             }
         }
     }
